@@ -5,18 +5,20 @@
     define ("MYSQL_PWD","");
     define ("MYSQL_DB","database_name");
 
-    function db_connect() {
+ 
+    function db_disconnect($dblink) {
+        global $dblink;
+        mysql_close($dblink);
+        $dblink=false;
+    }
+    
+       function db_connect() {
         global $dblink;
 
         if ($dblink = mysql_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PWD))
             mysql_select_db(MYSQL_DB);
         if ($e = mysql_error()) die ("connection error:".$e);
         return $dblink;
-    }
-    function db_disconnect($dblink) {
-        global $dblink;
-        mysql_close($dblink);
-        $dblink=false;
     }
     function executeSql($sql) {
         global $insertedId, $dblink, $db_error;
@@ -45,6 +47,7 @@
             $dblink = db_connect();
             $db_persistent=false;
         }
+        // trace Here
         if (!$dblink) return -1;
         $result=0;
         foreach($trans as $i=>$sql) {
