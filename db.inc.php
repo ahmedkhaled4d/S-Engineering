@@ -4,7 +4,7 @@
     define ("MYSQL_USER","");
     define ("MYSQL_PWD","");
     define ("MYSQL_DB","database_name");
-
+// eclipse
  
     function db_disconnect($dblink) {
         global $dblink;
