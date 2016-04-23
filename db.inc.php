@@ -6,13 +6,7 @@
     define ("MYSQL_DB","database_name");
 // eclipse
  
-    function db_disconnect($dblink) {
-        global $dblink;
-        mysql_close($dblink);
-        $dblink=false;
-    }
-    
-       function db_connect() {
+     function db_connect() {
         global $dblink;
 
         if ($dblink = mysql_connect(MYSQL_HOST,MYSQL_USER,MYSQL_PWD))
@@ -20,6 +14,14 @@
         if ($e = mysql_error()) die ("connection error:".$e);
         return $dblink;
     }
+    
+    function db_disconnect($dblink) {
+        global $dblink;
+        mysql_close($dblink);
+        $dblink=false;
+    }
+    
+   
     function executeSql($sql) {
         global $insertedId, $dblink, $db_error;
         $db_persistent=true;
@@ -62,7 +64,20 @@
         }
         return $result;
     }
-    function executeTableSql($sql) {
+
+    function getTableArray($sql,$indexfield=false) {
+        $dataset=executeTableSql($sql);
+        $result=array();
+        if ($dataset) while ($line=mysql_fetch_assoc($dataset)) {
+            if ($indexfield) 
+                $result[$line[$indexfield]] = $line;
+            else
+                $result[] = $line;
+        }
+        return $result;
+    }
+    
+        function executeTableSql($sql) {
         global $dblink,$db_error;
         $db_persistent=true;
         if (!$dblink) {
@@ -76,18 +91,7 @@
             db_disconnect($dblink);
         }
         return $result;
-    }
-    function getTableArray($sql,$indexfield=false) {
-        $dataset=executeTableSql($sql);
-        $result=array();
-        if ($dataset) while ($line=mysql_fetch_assoc($dataset)) {
-            if ($indexfield) 
-                $result[$line[$indexfield]] = $line;
-            else
-                $result[] = $line;
-        }
-        return $result;
-    }
+    } 
     function getOneValue($sql,$field=false) {
         $d = executeTableSql($sql);
         if ($d) $line=mysql_fetch_assoc($d);
