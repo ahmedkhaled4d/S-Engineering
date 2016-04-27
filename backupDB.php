@@ -1,4 +1,20 @@
 <?php
+error_reporting(E_ALL);
+
+/* Define database parameters here */
+define("DB_USER", 'root');
+define("DB_PASSWORD", '');
+define("DB_NAME", 'YOUR_DATABASE _NAME');
+define("DB_HOST", 'localhost');
+define("OUTPUT_DIR", 'dbBackup'); // Folder / Directory Name
+define("TABLES", '*');
+
+/* Instantiate Backup_Database and perform backup */
+$backupDatabase = new Backup_Database(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$status = $backupDatabase->backupTables(TABLES, OUTPUT_DIR) ? 'OK' : 'KO';
+echo "Backup result: " . $status . " - By Ahmed Khaled :) ";
+
+/* The Backup_Database class */
 class Backup_Database {
 /* Host where database is located  */
 
