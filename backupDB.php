@@ -1,3 +1,4 @@
+<?php
 class Backup_Database {
 /* Host where database is located  */
 
@@ -83,3 +84,22 @@ class Backup_Database {
 
     return $this->saveFile($sql, $outputDir);
   }
+ /* Save SQL to file @param string $sql */
+
+  protected function saveFile(&$sql, $outputDir = '.') {
+    if (!$sql)
+      return false;
+
+    try {
+      $handle = fopen($outputDir . '/db-backup-' . $this->dbName . '-' . date("Ymd-His", time()) . '.sql', 'w+');
+      fwrite($handle, $sql);
+      fclose($handle);
+    } catch (Exception $e) {
+      var_dump($e->getMessage());
+      return false;
+    }
+    return true;
+  }
+
+}
+?>
