@@ -20,9 +20,9 @@ class Backup_Database {
 
   var $host = 'localhost';
   var $username = 'root';
-  var $passwd = '';
+  var $passwd = 'root';
   var $dbName = 'YOUR_DATABASE _NAME';
-  var $charset = '';
+  var $charset = 'UTF-8';
 
   /* Constructor initializes database */
 
@@ -69,9 +69,9 @@ class Backup_Database {
     $numFields = mysql_num_fields($result);
 
     $sql .= 'DROP TABLE IF EXISTS ' . $table . ';';
-    $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE ' . $table));
+  
+      $row2 = mysql_fetch_row(mysql_query('SHOW CREATE TABLE ' . $table));
     $sql.= "\n\n" . $row2[1] . ";\n\n";
-
     for ($i = 0; $i < $numFields; $i++) {
       while ($row = mysql_fetch_row($result)) {
         $sql .= 'INSERT INTO ' . $table . ' VALUES(';
