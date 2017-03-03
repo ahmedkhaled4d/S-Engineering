@@ -2,9 +2,7 @@
  *  Compilation:  javac CC.java
  *  Execution:    java CC filename.txt
  *  Dependencies: Graph.java StdOut.java Queue.java
- *  Data files:   http://algs4.cs.princeton.edu/41graph/tinyG.txt
- *                http://algs4.cs.princeton.edu/41graph/mediumG.txt
- *                http://algs4.cs.princeton.edu/41graph/largeG.txt
+
  *
  *  Compute connected components using depth first search.
  *  Runs in O(E + V) time.
@@ -210,7 +208,7 @@ public class CC {
         In in = new In(args[0]);
         Graph G = new Graph(in);
         CC cc = new CC(G);
-
+        // RODO Ahmed Khaled
         // number of connected components
         int m = cc.count();
         StdOut.println(m + " components");
@@ -234,26 +232,4 @@ public class CC {
     }
 }
 
-/******************************************************************************
- *  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+
