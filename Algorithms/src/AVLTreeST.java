@@ -2,7 +2,6 @@
  *  Compilation:  javac AVLTreeST.java
  *  Execution:    java AVLTreeST < input.txt
  *  Dependencies: StdIn.java StdOut.java  
- *  Data files:   http://algs4.cs.princeton.edu/33balanced/tinyST.txt  
  *    
  *  A symbol table implemented using an AVL tree.
  *
@@ -398,7 +397,19 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         assert check();
     }
 
+   
+
     /**
+     * Returns the smallest key in the symbol table.
+     * 
+     * @return the smallest key in the symbol table
+     * @throws NoSuchElementException if the symbol table is empty
+     */
+    public Key min() {
+        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
+        return min(root).key;
+    }
+     /**
      * Removes the largest key and associated value from the given subtree.
      * 
      * @param x the subtree
@@ -411,18 +422,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         x.height = 1 + Math.max(height(x.left), height(x.right));
         return balance(x);
     }
-
-    /**
-     * Returns the smallest key in the symbol table.
-     * 
-     * @return the smallest key in the symbol table
-     * @throws NoSuchElementException if the symbol table is empty
-     */
-    public Key min() {
-        if (isEmpty()) throw new NoSuchElementException("called min() with empty symbol table");
-        return min(root).key;
-    }
-
     /**
      * Returns the node with the smallest key in the subtree.
      * 
@@ -699,7 +698,17 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         else return rank(hi) - rank(lo);
     }
 
+  
+
     /**
+     * Checks if AVL property is consistent.
+     * 
+     * @return {@code true} if AVL property is consistent.
+     */
+    private boolean isAVL() {
+        return isAVL(root);
+    }
+      /**
      * Checks if the AVL tree invariants are fine.
      * 
      * @return {@code true} if the AVL tree invariants are fine
@@ -711,16 +720,6 @@ public class AVLTreeST<Key extends Comparable<Key>, Value> {
         if (!isRankConsistent()) StdOut.println("Ranks not consistent");
         return isBST() && isAVL() && isSizeConsistent() && isRankConsistent();
     }
-
-    /**
-     * Checks if AVL property is consistent.
-     * 
-     * @return {@code true} if AVL property is consistent.
-     */
-    private boolean isAVL() {
-        return isAVL(root);
-    }
-
     /**
      * Checks if AVL property is consistent in the subtree.
      * 
