@@ -36,10 +36,7 @@ package edu.princeton.cs.algs4;
  *  <p>
  *  For additional documentation, see <a href="http://algs4.cs.princeton.edu/41graph">Section 4.1</a>   
  *  of <i>Algorithms, 4th Edition</i> by Robert Sedgewick and Kevin Wayne.
- *
- *  @author Robert Sedgewick
- *  @author Kevin Wayne
- */
+*/
 public class Bipartite {
     private boolean isBipartite;   // is the graph bipartite?
     private boolean[] color;       // color[v] gives vertices on one side of bipartition
