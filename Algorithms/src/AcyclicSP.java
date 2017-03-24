@@ -71,17 +71,7 @@ public class AcyclicSP {
                 relax(e);
         }
     }
-
-    // relax edge e
-    private void relax(DirectedEdge e) {
-        int v = e.from(), w = e.to();
-        if (distTo[w] > distTo[v] + e.weight()) {
-            distTo[w] = distTo[v] + e.weight();
-            edgeTo[w] = e;
-        }       
-    }
-
-    /**
+/**
      * Returns the length of a shortest path from the source vertex {@code s} to vertex {@code v}.
      * @param  v the destination vertex
      * @return the length of a shortest path from the source vertex {@code s} to vertex {@code v};
@@ -92,6 +82,16 @@ public class AcyclicSP {
         validateVertex(v);
         return distTo[v];
     }
+    // relax edge e
+    private void relax(DirectedEdge e) {
+        int v = e.from(), w = e.to();
+        if (distTo[w] > distTo[v] + e.weight()) {
+            distTo[w] = distTo[v] + e.weight();
+            edgeTo[w] = e;
+        }       
+    }
+
+    
 
     /**
      * Is there a path from the source vertex {@code s} to vertex {@code v}?
@@ -104,7 +104,12 @@ public class AcyclicSP {
         validateVertex(v);
         return distTo[v] < Double.POSITIVE_INFINITY;
     }
-
+ // throw an IllegalArgumentException unless {@code 0 <= v < V}
+    private void validateVertex(int v) {
+        int V = distTo.length;
+        if (v < 0 || v >= V)
+            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
+    }
     /**
      * Returns a shortest path from the source vertex {@code s} to vertex {@code v}.
      * @param  v the destination vertex
@@ -122,12 +127,7 @@ public class AcyclicSP {
         return path;
     }
 
-    // throw an IllegalArgumentException unless {@code 0 <= v < V}
-    private void validateVertex(int v) {
-        int V = distTo.length;
-        if (v < 0 || v >= V)
-            throw new IllegalArgumentException("vertex " + v + " is not between 0 and " + (V-1));
-    }
+   
 
     /**
      * Unit tests the {@code AcyclicSP} data type.
