@@ -60,22 +60,7 @@ public class Digraph {
     private Bag<Integer>[] adj;    // adj[v] = adjacency list for vertex v
     private int[] indegree;        // indegree[v] = indegree of vertex v
     
-    /**
-     * Initializes an empty digraph with <em>V</em> vertices.
-     *
-     * @param  V the number of vertices
-     * @throws IllegalArgumentException if {@code V < 0}
-     */
-    public Digraph(int V) {
-        if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
-        this.V = V;
-        this.E = 0;
-        indegree = new int[V];
-        adj = (Bag<Integer>[]) new Bag[V];
-        for (int v = 0; v < V; v++) {
-            adj[v] = new Bag<Integer>();
-        }
-    }
+    
 
     /**  
      * Initializes a digraph from the specified input stream.
@@ -109,7 +94,24 @@ public class Digraph {
             throw new IllegalArgumentException("invalid input format in Digraph constructor", e);
         }
     }
-
+    
+    /**
+     * Initializes an empty digraph with <em>V</em> vertices.
+     *
+     * @param  V the number of vertices
+     * @throws IllegalArgumentException if {@code V < 0}
+     */
+    public Digraph(int V) {
+        if (V < 0) throw new IllegalArgumentException("Number of vertices in a Digraph must be nonnegative");
+        this.V = V;
+        this.E = 0;
+        indegree = new int[V];
+        adj = (Bag<Integer>[]) new Bag[V];
+        for (int v = 0; v < V; v++) {
+            adj[v] = new Bag<Integer>();
+        }
+    }
+    
     /**
      * Initializes a new digraph that is a deep copy of the specified digraph.
      *
@@ -169,7 +171,7 @@ public class Digraph {
         validateVertex(w);
         adj[v].add(w);
         indegree[w]++;
-        E++;
+        E++; // inc
     }
 
     /**
@@ -257,26 +259,4 @@ public class Digraph {
 
 }
 
-/******************************************************************************
- *  Copyright 2002-2016, Robert Sedgewick and Kevin Wayne.
- *
- *  This file is part of algs4.jar, which accompanies the textbook
- *
- *      Algorithms, 4th edition by Robert Sedgewick and Kevin Wayne,
- *      Addison-Wesley Professional, 2011, ISBN 0-321-57351-X.
- *      http://algs4.cs.princeton.edu
- *
- *
- *  algs4.jar is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  algs4.jar is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  You should have received a copy of the GNU General Public License
- *  along with algs4.jar.  If not, see http://www.gnu.org/licenses.
- ******************************************************************************/
+ 
